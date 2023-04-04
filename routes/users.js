@@ -11,6 +11,12 @@ router.use(bodyParser.json());
 router.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
 
+  const existingUser = await User.findOne({ username });
+  console.log(existingUser);
+  if (existingUser) {
+    return res.status(400).json({ message: "Username already exists" });
+  }
+
   // Hash password before saving to database
   const hashedPassword = await bcrypt.hash(password, 10);
 
