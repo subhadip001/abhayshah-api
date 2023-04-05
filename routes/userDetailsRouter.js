@@ -3,6 +3,16 @@ const { User } = require("../model/usersSchema");
 const router = express.Router();
 
 // Get all user details
+router.get("/userdetails", async (req, res) => {
+  try {
+    const userDetails = await User.find();
+    console.log(userDetails);
+    res.json(userDetails);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.get("/userdetails/:id", async (req, res) => {
   const params = req.params;
   console.log(params);

@@ -9,7 +9,7 @@ router.use(bodyParser.json());
 
 // Sign up API endpoint
 router.post("/signup", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, fullname, email, password } = req.body;
 
   const existingUser = await User.findOne({ username });
   console.log(existingUser);
@@ -22,6 +22,7 @@ router.post("/signup", async (req, res) => {
 
   const user = new User({
     username,
+    fullname,
     email,
     password: hashedPassword,
   });
@@ -60,7 +61,9 @@ router.post("/login", async (req, res) => {
       "mysecretkey"
     );
 
-    res.status(200).json({ token: token, username: username });
+    res
+      .status(200)
+      .json({ token: token, username: username, fullname: user.fullname });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Error logging in" });
