@@ -1,4 +1,17 @@
 const mongoose = require("mongoose");
+
+const resourcesShcema = new mongoose.Schema({
+  docname: {
+    type: String,
+  },
+  docDesc: {
+    type: String,
+  },
+  docLink: {
+    type: String,
+  },
+});
+
 const user = new mongoose.Schema({
   username: {
     type: String,
@@ -21,6 +34,7 @@ const user = new mongoose.Schema({
   photo: {
     type: String,
   },
+  resources: [resourcesShcema],
 });
 
 // console.log(user.methods);
