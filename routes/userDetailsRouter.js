@@ -1,6 +1,9 @@
 const express = require("express");
 const { User } = require("../model/usersSchema");
+const bodyParser = require("body-parser")
 const router = express.Router();
+
+router.use(bodyParser.json())
 
 // Get all user details
 router.get("/userdetails", async (req, res) => {
@@ -12,10 +15,22 @@ router.get("/userdetails", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+router.get("/userfullnames", async (req, res) => {
+  try {
+    const userDetails = await User.find(
+      {},
+      { fullname: 1, username: 1, _id: 0 }
+    );
+    //console.log(userDetails);
+    res.json(userDetails);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 router.get("/userdetails/:id", async (req, res) => {
   const params = req.params;
-  console.log(params);
+  //console.log(params);
   try {
     const userDetails = await User.findOne({ username: params.id });
     //console.log(userDetails);

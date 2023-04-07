@@ -14,9 +14,11 @@ app.use(express.urlencoded({ extended: true }));
 const { User } = require("./model/usersSchema");
 const usersRouter = require("./routes/users");
 const userDetailsRouter = require("./routes/userDetailsRouter");
+const problemRouter = require("./routes/problemsRoute");
 
 app.use("/", usersRouter);
 app.use("/", userDetailsRouter);
+app.use("/", problemRouter);
 const path = require("path");
 
 if (process.env.NODE_ENV === "production") {
