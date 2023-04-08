@@ -4,6 +4,9 @@ const resourcesShcema = new mongoose.Schema({
   docname: {
     type: String,
   },
+  docType: {
+    type: String,
+  },
   docDesc: {
     type: String,
   },
