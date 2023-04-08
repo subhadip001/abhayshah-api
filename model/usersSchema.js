@@ -15,7 +15,6 @@ const resourcesShcema = new mongoose.Schema({
   },
   docOwner: {
     type: String,
-    ref: "User",
   },
 });
 
