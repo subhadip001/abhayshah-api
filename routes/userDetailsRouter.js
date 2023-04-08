@@ -110,13 +110,13 @@ router.post("/addResource", async (req, res) => {
 
     // Add the new resource to the user's resources array
 
-    // const resource = new Resource({
-    //   docname: docname,
-    //   docType: docType,
-    //   docDesc: docDesc,
-    //   docOwner: username,
-    //   docLink: docLink,
-    // });
+    const resource = new Resource({
+      docname: docname,
+      docType: docType,
+      docDesc: docDesc,
+      docOwner: username,
+      docLink: docLink,
+    });
 
     user.resources.push({
       docname: docname,
@@ -127,9 +127,9 @@ router.post("/addResource", async (req, res) => {
     });
 
     // Save the updated user document
-    // const newResource = await resource.save();
+    const newResource = await resource.save();
     const updatedUser = await user.save();
-    //console.log(newResource);
+    console.log(newResource);
     console.log(updatedUser);
 
     res.json({ success: true, message: "Resource added successfully" });
