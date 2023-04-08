@@ -148,4 +148,16 @@ router.get("/getAllPublicResorces", async (req, res) => {
   }
 });
 
+router.post("/getResourcesByUsername", async (req, res) => {
+  try {
+    const { username } = req.body;
+    const resources = await Resource.find({ docOwner: username });
+
+    console.log(resources);
+    res.status(201).json(resources);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 module.exports = router;
