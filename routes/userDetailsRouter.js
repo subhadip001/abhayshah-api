@@ -1,9 +1,10 @@
 const express = require("express");
 const { User } = require("../model/usersSchema");
-const bodyParser = require("body-parser")
+const { Resource } = require("../model/usersSchema");
+const bodyParser = require("body-parser");
 const router = express.Router();
 
-router.use(bodyParser.json())
+router.use(bodyParser.json());
 
 // Get all user details
 router.get("/userdetails", async (req, res) => {
@@ -101,7 +102,7 @@ router.post("/updateUserdetails", async (req, res) => {
 // add a new resource of a user
 
 router.post("/addResource", async (req, res) => {
-  const { username, docname, docDesc } = req.body;
+  const { username, docname, docType, docDesc, docLink } = req.body;
 
   try {
     // Find the user by username
@@ -109,8 +110,11 @@ router.post("/addResource", async (req, res) => {
 
     // Add the new resource to the user's resources array
     user.resources.push({
-      docname,
-      docDesc,
+      docname: docname,
+      docType: docType,
+      docDesc: docDesc,
+      docOwner: username,
+      docLink: docLink,
     });
 
     // Save the updated user document
@@ -121,6 +125,15 @@ router.post("/addResource", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
+router.get("/getAllPublicResorces", async (req, res) => {
+  try {
+    const resources = await Resource.find({ docType: "public" });
+    res.status(201).json(resources);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server error" });
   }
 });
 

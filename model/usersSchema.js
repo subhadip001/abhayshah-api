@@ -13,6 +13,10 @@ const resourcesShcema = new mongoose.Schema({
   docLink: {
     type: String,
   },
+  docOwner: {
+    type: String,
+    ref: "User",
+  },
 });
 
 const user = new mongoose.Schema({
@@ -42,4 +46,6 @@ const user = new mongoose.Schema({
 
 // console.log(user.methods);
 const User = mongoose.model("User", user);
+const Resource = mongoose.model("Resource", resourcesShcema);
 module.exports = { User };
+module.exports = { Resource };
