@@ -46,5 +46,4 @@ const user = new mongoose.Schema({
 // console.log(user.methods);
 const User = mongoose.model("User", user);
 const Resource = mongoose.model("Resource", resourcesShcema);
-module.exports = { User };
-module.exports = { Resource };
+module.exports = { User , Resource };
