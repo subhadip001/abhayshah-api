@@ -300,4 +300,16 @@ router.get("/getAllLeaveApps", async (req, res) => {
   }
 });
 
+router.post("/getLeaveAppsByUsername", async (req, res) => {
+  try {
+    const { username } = req.body;
+    const leaveApps = await LeaveApp.find({ appOwner: username });
+
+    console.log(leaveApps);
+    res.status(201).json(leaveApps);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 module.exports = router;
