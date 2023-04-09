@@ -1,5 +1,5 @@
 const express = require("express");
-const { User } = require("../model/usersSchema");
+const { User, Publication, Project } = require("../model/usersSchema");
 const { Resource } = require("../model/usersSchema");
 const bodyParser = require("body-parser");
 const router = express.Router();
@@ -157,6 +157,98 @@ router.post("/getResourcesByUsername", async (req, res) => {
     res.status(201).json(resources);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.post("/addPublications", async (req, res) => {
+  const { username, docname, docType, docDesc, docLink } = req.body;
+
+  try {
+    // Find the user by username
+    const user = await User.findOne({ username });
+
+    // Add the new resource to the user's resources array
+
+    const publication = new Publication({
+      docname: docname,
+      docType: docType,
+      docDesc: docDesc,
+      docOwner: username,
+      docLink: docLink,
+    });
+
+    user.publications.push({
+      docname: docname,
+      docType: docType,
+      docDesc: docDesc,
+      docOwner: username,
+      docLink: docLink,
+    });
+
+    // Save the updated user document
+    const newPublication = await publication.save();
+    const updatedUser = await user.save();
+    console.log(newPublication);
+    console.log(updatedUser);
+
+    res.json({ success: true, message: "Publication added successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+router.post("/addProjects", async (req, res) => {
+  const { username, docname, docType, docDesc, docLink } = req.body;
+
+  try {
+    // Find the user by username
+    const user = await User.findOne({ username });
+
+    // Add the new resource to the user's resources array
+
+    const project = new Project({
+      docname: docname,
+      docType: docType,
+      docDesc: docDesc,
+      docOwner: username,
+      docLink: docLink,
+    });
+
+    user.projects.push({
+      docname: docname,
+      docType: docType,
+      docDesc: docDesc,
+      docOwner: username,
+      docLink: docLink,
+    });
+
+    // Save the updated user document
+    const newProject = await project.save();
+    const updatedUser = await user.save();
+    console.log(newProject);
+    console.log(updatedUser);
+
+    res.json({ success: true, message: "Project added successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
+router.get("/getAllPublications", async (req, res) => {
+  try {
+    const publications = await Publication.find();
+    res.status(201).json(publications);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server error" });
+  }
+});
+router.get("/getAllProjects", async (req, res) => {
+  try {
+    const projects = await Project.find();
+    res.status(201).json(projects);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server error" });
   }
 });
 
