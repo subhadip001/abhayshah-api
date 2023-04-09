@@ -1,5 +1,10 @@
 const express = require("express");
-const { User, Publication, Project } = require("../model/usersSchema");
+const {
+  User,
+  Publication,
+  Project,
+  LeaveApp,
+} = require("../model/usersSchema");
 const { Resource } = require("../model/usersSchema");
 const bodyParser = require("body-parser");
 const router = express.Router();
@@ -247,6 +252,49 @@ router.get("/getAllProjects", async (req, res) => {
   try {
     const projects = await Project.find();
     res.status(201).json(projects);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server error" });
+  }
+});
+
+router.post("/addLeaveApp", async (req, res) => {
+  const { username, appType, appDesc } = req.body;
+
+  try {
+    // Find the user by username
+    const user = await User.findOne({ username });
+
+    // Add the new resource to the user's resources array
+
+    const leaveApp = new LeaveApp({
+      appType: appType,
+      appDesc: appDesc,
+      appOwner: username,
+    });
+
+    user.leaveApplications.push({
+      appType: appType,
+      appDesc: appDesc,
+      appOwner: username,
+    });
+
+    // Save the updated user document
+    const newLeaveApp = await leaveApp.save();
+    const updatedUser = await user.save();
+    console.log(newLeaveApp);
+    console.log(updatedUser);
+
+    res.json({ success: true, message: "Project added successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
+router.get("/getAllLeaveApps", async (req, res) => {
+  try {
+    const leaveApps = await LeaveApp.find();
+    res.status(201).json(leaveApps);
   } catch (error) {
     res.status(500).json({ message: "Internal Server error" });
   }

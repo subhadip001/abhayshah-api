@@ -54,6 +54,18 @@ const projectsShcema = new mongoose.Schema({
     ref: "User",
   },
 });
+const leaveAppSchema = new mongoose.Schema({
+  appType: {
+    type: String,
+  },
+  appDesc: {
+    type: String,
+  },
+  appOwner: {
+    type: String,
+    ref: "User",
+  },
+});
 
 const user = new mongoose.Schema({
   username: {
@@ -80,6 +92,7 @@ const user = new mongoose.Schema({
   resources: [resourcesShcema],
   publications: [publicationsShcema],
   projects: [projectsShcema],
+  leaveApplications: [leaveAppSchema],
 });
 
 // console.log(user.methods);
@@ -87,4 +100,5 @@ const User = mongoose.model("User", user);
 const Resource = mongoose.model("Resource", resourcesShcema);
 const Publication = mongoose.model("Publication", publicationsShcema);
 const Project = mongoose.model("Project", projectsShcema);
-module.exports = { User, Resource, Publication, Project };
+const LeaveApp = mongoose.model("LeaveApp", leaveAppSchema);
+module.exports = { User, Resource, Publication, Project, LeaveApp };
