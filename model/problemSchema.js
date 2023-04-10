@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const solutionSchema = new mongoose.Schema({
   answer: {
     type: String,
+    ref : "Problem"
   },
   author: {
     fullname: {

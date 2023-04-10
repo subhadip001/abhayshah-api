@@ -16,14 +16,17 @@ router.get("/getProblems", async (req, res) => {
 });
 
 router.post("/postProblems", async (req, res) => {
-  const { question, dateOfPosting, authorUsername } = req.body;
+  const { question, authorUsername, solution } = req.body;
+  const date = new Date();
   const problem = new Problem({
     question: question,
-    dateOfPosting: dateOfPosting,
+    dateOfPosting: date,
     author: {
       username: authorUsername,
     },
   });
+
+  problem.solution.push(solution);
 
   try {
     const newProblem = await problem.save();
@@ -32,7 +35,5 @@ router.post("/postProblems", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-
 
 module.exports = router;
