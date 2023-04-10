@@ -16,7 +16,7 @@ router.get("/getProblems", async (req, res) => {
 });
 
 router.post("/postProblems", async (req, res) => {
-  const { question, authorUsername, solution } = req.body;
+  const { question, authorUsername, authorFullname, answer } = req.body;
   const date = new Date();
   const problem = new Problem({
     question: question,
@@ -26,7 +26,13 @@ router.post("/postProblems", async (req, res) => {
     },
   });
 
-  problem.solution.push(solution);
+  problem.solution.push({
+    answer: answer,
+    author: {
+      fullname: authorFullname,
+      username: authorUsername,
+    },
+  });
 
   try {
     const newProblem = await problem.save();
