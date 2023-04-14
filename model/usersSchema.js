@@ -65,6 +65,9 @@ const leaveAppSchema = new mongoose.Schema({
     type: String,
     ref: "User",
   },
+  appStatus : {
+    type : String
+  }
 });
 
 const user = new mongoose.Schema({

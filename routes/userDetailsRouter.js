@@ -270,12 +270,14 @@ router.post("/addLeaveApp", async (req, res) => {
       appType: appType,
       appDesc: appDesc,
       appOwner: username,
+      appStatus: "pending",
     });
 
     user.leaveApplications.push({
       appType: appType,
       appDesc: appDesc,
       appOwner: username,
+      appStatus: "pending",
     });
 
     // Save the updated user document
@@ -301,12 +303,27 @@ router.get("/getAllLeaveApps", async (req, res) => {
 });
 
 router.post("/getLeaveAppsByUsername", async (req, res) => {
+  const { username } = req.body;
   try {
-    const { username } = req.body;
     const leaveApps = await LeaveApp.find({ appOwner: username });
 
     console.log(leaveApps);
     res.status(201).json(leaveApps);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.post("/updateApplicationStatus", async (req, res) => {
+  const { status } = req.body;
+
+  try {
+    const appDetails = await LeaveApp.findOneAndUpdate(
+      { username },
+      { $set: { appStatus : status } },
+      { new: true }
+    );
+    res.status(200).json(appDetails);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
