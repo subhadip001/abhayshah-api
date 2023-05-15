@@ -67,6 +67,7 @@ const leaveAppSchema = new mongoose.Schema({
   },
   appStatus: {
     type: String,
+    enum: ["Accepted", "Rejected", "Pending"],
   },
 });
 
@@ -112,11 +113,11 @@ const user = new mongoose.Schema({
   profession: [
     {
       from: {
-        type: Date,
+        type: String,
         required: true,
       },
       to: {
-        type: Date,
+        type: String,
       },
       designation: {
         type: String,
@@ -170,11 +171,11 @@ const user = new mongoose.Schema({
   administrative: [
     {
       from: {
-        type: Date,
+        type: String,
         required: true,
       },
       to: {
-        type: Date,
+        type: String,
       },
       designation: {
         type: String,
@@ -247,7 +248,7 @@ const user = new mongoose.Schema({
         type: String,
       },
       dateParticipated: {
-        type: Date,
+        type: String,
       },
     },
   ],
@@ -261,7 +262,7 @@ const user = new mongoose.Schema({
         type: String,
       },
       dateDelivered: {
-        type: Date,
+        type: String,
       },
     },
   ],
@@ -278,7 +279,7 @@ const user = new mongoose.Schema({
         type: String,
       },
       date: {
-        type: Date,
+        type: String,
       },
     },
   ],
