@@ -4,7 +4,9 @@ const app = express();
 require("./config/database");
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://abhayshah-6ive.vercel.app'
+}));
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "config/config.env" });
 }
