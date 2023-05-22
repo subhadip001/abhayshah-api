@@ -25,7 +25,7 @@ router.get("/userfullnames", async (req, res) => {
   try {
     const userDetails = await User.find(
       {},
-      { fullname: 1, username: 1, _id: 0 }
+      { fullname: 1, username: 1, _id: 0, about: 1 }
     );
     //console.log(userDetails);
     res.json(userDetails);
@@ -320,7 +320,7 @@ router.post("/updateApplicationStatus", async (req, res) => {
   try {
     const appDetails = await LeaveApp.findOneAndUpdate(
       { username },
-      { $set: { appStatus : status } },
+      { $set: { appStatus: status } },
       { new: true }
     );
     res.status(200).json(appDetails);
