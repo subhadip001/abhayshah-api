@@ -4,9 +4,17 @@ const app = express();
 require("./config/database");
 require("dotenv").config();
 
-app.use(cors({
-  origin: 'https://abhayshah-6ive.vercel.app'
-}));
+const allowedOrigins = [
+  "https://abhayshah-6ive.vercel.app",
+  "http://localhost:5000",
+  "http://localhost:8000",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+);
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "config/config.env" });
 }
