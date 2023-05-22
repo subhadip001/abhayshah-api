@@ -93,6 +93,7 @@ const user = new mongoose.Schema({
   },
   about: {
     type: String,
+    enum: ["Professor", "B.Tech", "M.Tech", "Ph.D"],
   },
   memberships: [
     {
