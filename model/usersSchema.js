@@ -58,6 +58,15 @@ const leaveAppSchema = new mongoose.Schema({
   appType: {
     type: String,
   },
+  days: {
+    type: String,
+  },
+  sDate: {
+    type: Date,
+  },
+  eDate: {
+    type: Date,
+  },
   appDesc: {
     type: String,
   },

@@ -258,7 +258,7 @@ router.get("/getAllProjects", async (req, res) => {
 });
 
 router.post("/addLeaveApp", async (req, res) => {
-  const { username, appType, appDesc } = req.body;
+  const { username, appType, appDesc, days, sDate, eDate } = req.body;
 
   try {
     // Find the user by username
@@ -270,14 +270,17 @@ router.post("/addLeaveApp", async (req, res) => {
       appType: appType,
       appDesc: appDesc,
       appOwner: username,
-      appStatus: "pending",
+      days: days,
+      sDate: sDate,
+      eDate: eDate,
+      appStatus: "Pending",
     });
 
     user.leaveApplications.push({
       appType: appType,
       appDesc: appDesc,
       appOwner: username,
-      appStatus: "pending",
+      appStatus: "Pending",
     });
 
     // Save the updated user document
