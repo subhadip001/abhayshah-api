@@ -318,14 +318,17 @@ router.post("/getLeaveAppsByUsername", async (req, res) => {
 });
 
 router.post("/updateApplicationStatus", async (req, res) => {
-  const { username, status } = req.body;
+  const { username, appId, status } = req.body;
+
+  console.log(username, status);
 
   try {
     const appDetails = await LeaveApp.findOneAndUpdate(
-      { username: username },
+      { appOwner: username, _id: appId },
       { $set: { appStatus: status } },
       { new: true }
     );
+    console.log(appDetails);
     res.status(200).json(appDetails);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
