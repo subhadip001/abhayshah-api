@@ -258,7 +258,7 @@ router.get("/getAllProjects", async (req, res) => {
 });
 
 router.post("/addLeaveApp", async (req, res) => {
-  const { username, fullName , appType, appDesc, days, sDate, eDate } = req.body;
+  const { username, fullName, appType, appDesc, days, sDate, eDate } = req.body;
 
   try {
     // Find the user by username
@@ -270,7 +270,7 @@ router.post("/addLeaveApp", async (req, res) => {
       appType: appType,
       appDesc: appDesc,
       appOwner: username,
-      appOwnerName : fullName,
+      appOwnerName: fullName,
       days: days,
       sDate: sDate,
       eDate: eDate,
