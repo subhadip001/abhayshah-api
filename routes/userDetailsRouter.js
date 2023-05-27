@@ -289,7 +289,7 @@ router.post("/addLeaveApp", async (req, res) => {
     console.log(newLeaveApp);
     console.log(updatedUser);
 
-    res.json({ success: true, message: "Project added successfully" });
+    res.json({ success: true, message: "Application added successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Internal server error" });
@@ -318,11 +318,11 @@ router.post("/getLeaveAppsByUsername", async (req, res) => {
 });
 
 router.post("/updateApplicationStatus", async (req, res) => {
-  const { status } = req.body;
+  const { username, status } = req.body;
 
   try {
     const appDetails = await LeaveApp.findOneAndUpdate(
-      { username },
+      { username: username },
       { $set: { appStatus: status } },
       { new: true }
     );
