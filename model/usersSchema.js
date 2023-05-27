@@ -74,6 +74,9 @@ const leaveAppSchema = new mongoose.Schema({
     type: String,
     ref: "User",
   },
+  appOwnerName: {
+    type: String,
+  },
   appStatus: {
     type: String,
     enum: ["Accepted", "Rejected", "Pending"],
