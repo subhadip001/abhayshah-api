@@ -219,7 +219,7 @@ router.post("/addProjects", async (req, res) => {
   try {
     // Find the user by username
     const user = await User.findOne({ username });
-    const totalProjectCount = await Project.countDocuments()
+    const totalProjectCount = await Project.countDocuments();
 
     // Add the new resource to the user's resources array
 
@@ -240,8 +240,9 @@ router.post("/addProjects", async (req, res) => {
     //user.projects.push(project);
 
     // Save the updated user document
-    //const newProject = await project.save();
-    const updatedUser = await user.save();
+    const newProject = await project.save();
+    //const updatedUser = await user.save();
+    
     console.log(newProject);
     console.log(updatedUser);
 
