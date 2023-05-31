@@ -233,20 +233,10 @@ router.post("/addProjects", async (req, res) => {
       projectNumber,
       sDate,
       eDate,
+      serialNumber: user.projects.length + 1,
     });
 
-    user.projects.push({
-      docname: docname,
-      docType: docType,
-      docDesc: docDesc,
-      docOwner: username,
-      docLink: docLink,
-      projectType,
-      fundingAgency,
-      projectNumber,
-      sDate,
-      eDate,
-    });
+    user.projects.push(project);
 
     // Save the updated user document
     const newProject = await project.save();
