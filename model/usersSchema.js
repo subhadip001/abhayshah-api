@@ -39,6 +39,10 @@ const publicationsShcema = new mongoose.Schema({
     type: String,
     ref: "User",
   },
+  docOwnerName: {
+    type: String,
+    ref: "User",
+  },
   publicationType: {
     type: String,
     enum: ["Conferences", "Chapters", "Journals", "Patents", "Favorites"],
