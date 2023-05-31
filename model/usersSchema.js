@@ -344,7 +344,7 @@ const user = new mongoose.Schema({
   ],
   resources: [resourcesShcema],
   publications: [publicationsShcema],
-  projects: [projectsShcema],
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
   leaveApplications: [leaveAppSchema],
 });
 
