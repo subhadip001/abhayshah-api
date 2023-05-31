@@ -237,10 +237,10 @@ router.post("/addProjects", async (req, res) => {
       serialNumber: totalProjectCount + 1,
     });
 
-    user.projects.push(project);
+    //user.projects.push(project);
 
     // Save the updated user document
-    const newProject = await project.save();
+    //const newProject = await project.save();
     const updatedUser = await user.save();
     console.log(newProject);
     console.log(updatedUser);
