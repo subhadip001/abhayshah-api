@@ -231,8 +231,8 @@ router.post("/addProjects", async (req, res) => {
       projectType,
       fundingAgency,
       projectNumber,
-      sDate,
-      eDate,
+      sDate: sDate.substring(0, 10),
+      eDate: eDate.substring(0, 10),
       serialNumber: user.projects.length + 1,
     });
 
