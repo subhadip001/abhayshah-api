@@ -107,7 +107,7 @@ router.post("/updateUserdetails", async (req, res) => {
 // add a new resource of a user
 
 router.post("/addResource", async (req, res) => {
-  const { username, docname, docType, docDesc, docLink } = req.body;
+  const { username, docname, docType, docDesc, docLink, docOwnerName } = req.body;
 
   try {
     // Find the user by username
@@ -121,15 +121,10 @@ router.post("/addResource", async (req, res) => {
       docDesc: docDesc,
       docOwner: username,
       docLink: docLink,
+      docOwnerName
     });
 
-    user.resources.push({
-      docname: docname,
-      docType: docType,
-      docDesc: docDesc,
-      docOwner: username,
-      docLink: docLink,
-    });
+    user.resources.push(resource);
 
     // Save the updated user document
     const newResource = await resource.save();
@@ -166,7 +161,7 @@ router.post("/getResourcesByUsername", async (req, res) => {
 });
 
 router.post("/addPublications", async (req, res) => {
-  const { username, docname, docType, docDesc, docLink, publicationType } =
+  const { username, docname, docType, docDesc, docLink, publicationType , docOwnerName } =
     req.body;
 
   try {
@@ -182,6 +177,7 @@ router.post("/addPublications", async (req, res) => {
       docOwner: username,
       docLink: docLink,
       publicationType,
+      docOwnerName
     });
 
     user.publications.push(publication);

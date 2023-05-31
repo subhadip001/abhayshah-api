@@ -17,10 +17,14 @@ const resourcesShcema = new mongoose.Schema({
     type: String,
     ref: "User",
   },
-  docDate : {
-    type : Date,
-    default : Date.now()
-  }
+  docOwnerName: {
+    type: String,
+    ref: "User",
+  },
+  docDate: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 const publicationsShcema = new mongoose.Schema({
   docname: {
@@ -47,9 +51,9 @@ const publicationsShcema = new mongoose.Schema({
     type: String,
     enum: ["Conferences", "Chapters", "Journals", "Patents", "Favorites"],
   },
-  docDate : {
-    type : Date,
-    default : Date.now()
+  docDate: {
+    type: Date,
+    default: Date.now(),
   },
 });
 const projectsShcema = new mongoose.Schema({
@@ -76,13 +80,13 @@ const projectsShcema = new mongoose.Schema({
   fundingAgency: {
     type: String,
   },
-  docDate : {
-    type : Date,
-    default : Date.now()
+  docDate: {
+    type: Date,
+    default: Date.now(),
   },
   projectNumber: Number,
   serialNumber: {
-    type : Number
+    type: Number,
   },
   sDate: Date,
   eDate: Date,
