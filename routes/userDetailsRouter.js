@@ -203,7 +203,18 @@ router.post("/addPublications", async (req, res) => {
   }
 });
 router.post("/addProjects", async (req, res) => {
-  const { username, docname, docType, docDesc, docLink } = req.body;
+  const {
+    username,
+    docname,
+    docType,
+    docDesc,
+    docLink,
+    projectType,
+    fundingAgency,
+    projectNumber,
+    sDate,
+    eDate,
+  } = req.body;
 
   try {
     // Find the user by username
@@ -217,6 +228,11 @@ router.post("/addProjects", async (req, res) => {
       docDesc: docDesc,
       docOwner: username,
       docLink: docLink,
+      projectType,
+      fundingAgency,
+      projectNumber,
+      sDate,
+      eDate,
     });
 
     user.projects.push({
@@ -225,6 +241,11 @@ router.post("/addProjects", async (req, res) => {
       docDesc: docDesc,
       docOwner: username,
       docLink: docLink,
+      projectType,
+      fundingAgency,
+      projectNumber,
+      sDate,
+      eDate,
     });
 
     // Save the updated user document
