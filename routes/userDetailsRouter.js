@@ -219,6 +219,7 @@ router.post("/addProjects", async (req, res) => {
   try {
     // Find the user by username
     const user = await User.findOne({ username });
+    const totalProjectCount = await Project.countDocuments()
 
     // Add the new resource to the user's resources array
 
@@ -231,9 +232,9 @@ router.post("/addProjects", async (req, res) => {
       projectType,
       fundingAgency,
       projectNumber,
-      sDate: sDate.substring(0, 10),
-      eDate: eDate.substring(0, 10),
-      serialNumber: user.projects.length + 1,
+      sDate,
+      eDate,
+      serialNumber: totalProjectCount + 1,
     });
 
     user.projects.push(project);
