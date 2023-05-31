@@ -46,7 +46,7 @@ const publicationsShcema = new mongoose.Schema({
   docDate : {
     type : Date,
     default : Date.now()
-  }
+  },
 });
 const projectsShcema = new mongoose.Schema({
   docname: {
