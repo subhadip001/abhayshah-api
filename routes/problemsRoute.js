@@ -16,7 +16,12 @@ router.get("/getProblems", async (req, res) => {
 });
 
 router.post("/postProblems", async (req, res) => {
-  const { question, authorUsername, authorFullname, answer } = req.body;
+  const { username, question, authorUsername, authorFullname, answer } =
+    req.body;
+  if (username !== "admin") {
+    res.status(401).json({ message: "Request not authorised" });
+    return;
+  }
   const date = new Date();
   const problem = new Problem({
     question: question,

@@ -24,10 +24,14 @@ const { User } = require("./model/usersSchema");
 const usersRouter = require("./routes/users");
 const userDetailsRouter = require("./routes/userDetailsRouter");
 const problemRouter = require("./routes/problemsRoute");
+const newsRouter = require("./routes/newsRouter");
+const eventRouter = require("./routes/eventsRouter");
 
 app.use("/", usersRouter);
 app.use("/", userDetailsRouter);
 app.use("/", problemRouter);
+app.use("/", newsRouter);
+app.use("/", eventRouter);
 const path = require("path");
 
 if (process.env.NODE_ENV === "production") {

@@ -1,21 +1,21 @@
 const mongoose = require("mongoose");
 
-const newsSchema = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
   title: {
     type: String,
   },
   desc: {
     type: String,
   },
-  photoLink: {
+  eventDate: {
     type: String,
   },
-  dateOfNews: {
+  dateOfPosting: {
     type: Date,
     default: Date.now(),
   },
 });
 
-const News = mongoose.model("News", newsSchema);
+const Event = mongoose.model("Event", eventSchema);
 
-module.exports = { News };
+module.exports = { Event };
