@@ -52,13 +52,13 @@ router.post("/login", async (req, res) => {
 
     // Check if user exists
     if (!user) {
-      return res.status(401).json({ message: "Authentication failed" });
+      return res.status(401).json({ message: "User does not exists" });
     }
 
     // Check if password is correct
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Authentication failed" });
+      return res.status(401).json({ message: "Password is invalid" });
     }
 
     // Generate JWT token
