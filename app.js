@@ -26,12 +26,14 @@ const userDetailsRouter = require("./routes/userDetailsRouter");
 const problemRouter = require("./routes/problemsRoute");
 const newsRouter = require("./routes/newsRouter");
 const eventRouter = require("./routes/eventsRouter");
+const oppRouter = require("./routes/oppRouter");
 
 app.use("/", usersRouter);
 app.use("/", userDetailsRouter);
 app.use("/", problemRouter);
 app.use("/", newsRouter);
 app.use("/", eventRouter);
+app.use("/", oppRouter);
 const path = require("path");
 
 if (process.env.NODE_ENV === "production") {
