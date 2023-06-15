@@ -28,12 +28,12 @@ const newsRouter = require("./routes/newsRouter");
 const eventRouter = require("./routes/eventsRouter");
 const oppRouter = require("./routes/oppRouter");
 
-app.use("/abhay/", usersRouter);
-app.use("/abhay/", userDetailsRouter);
-app.use("/abhay/", problemRouter);
-app.use("/abhay/", newsRouter);
-app.use("/abhay/", eventRouter);
-app.use("/abhay/", oppRouter);
+app.use("/", usersRouter);
+app.use("/", userDetailsRouter);
+app.use("/", problemRouter);
+app.use("/", newsRouter);
+app.use("/", eventRouter);
+app.use("/", oppRouter);
 
 const path = require("path");
 
