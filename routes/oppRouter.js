@@ -43,13 +43,10 @@ router.post("/postOppRequest", async (req, res) => {
 
 router.post("/send-email", async (req, res) => {
   try {
-    // Get the file URL from the request body or query parameters
     const { fileUrl, recipientEmail, nameOfStudent, branch, message } =
       req.body;
 
-    // Create a nodemailer transporter
     const transporter = nodemailer.createTransport({
-      // Configure the SMTP server details (e.g., Gmail)
       service: "gmail",
       auth: {
         user: process.env.MAIL_ID,
@@ -57,12 +54,10 @@ router.post("/send-email", async (req, res) => {
       },
     });
 
-    // Create an attachment object
     const attachment = {
-      path: fileUrl, // Path or URL of the file stored in Firebase
+      path: fileUrl,
     };
 
-    // Define the email content
     const mailOptions = {
       from: process.env.MAIL_ID,
       to: recipientEmail,
@@ -72,7 +67,6 @@ router.post("/send-email", async (req, res) => {
       attachments: [attachment],
     };
 
-    // Send the email
     const info = await transporter.sendMail(mailOptions);
 
     console.log("Email sent:", info.response);
