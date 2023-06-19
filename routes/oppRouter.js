@@ -43,7 +43,7 @@ router.post("/postOppRequest", async (req, res) => {
 
 router.post("/send-email", async (req, res) => {
   try {
-    const { fileUrl, recipientEmail, nameOfStudent, branch, message } =
+    const { fileUrl, recipientEmail } =
       req.body;
 
     const transporter = nodemailer.createTransport({
@@ -63,7 +63,6 @@ router.post("/send-email", async (req, res) => {
       to: recipientEmail,
       subject: "New Opportunity Request",
       text: "Please find the attachment.",
-      html: `<span>Name : ${nameOfStudent}</span><br><span>Branch : ${branch}</span><br><span>Message : ${message}</span>`,
       attachments: [attachment],
     };
 

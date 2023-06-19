@@ -4,7 +4,7 @@ require("dotenv").config({ path: "config/config.env" });
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://abheyshahpersonalproject-default-rtdb.firebaseio.com",
+  databaseURL: process.env.FIREBASE_DB_URL,
 });
 
 module.exports = admin;
