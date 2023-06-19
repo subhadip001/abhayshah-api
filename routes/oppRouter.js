@@ -44,7 +44,8 @@ router.post("/postOppRequest", async (req, res) => {
 router.post("/send-email", async (req, res) => {
   try {
     // Get the file URL from the request body or query parameters
-    const { fileUrl, recipientEmail } = req.body;
+    const { fileUrl, recipientEmail, nameOfStudent, branch, message } =
+      req.body;
 
     // Create a nodemailer transporter
     const transporter = nodemailer.createTransport({
@@ -65,8 +66,9 @@ router.post("/send-email", async (req, res) => {
     const mailOptions = {
       from: process.env.MAIL_ID,
       to: recipientEmail,
-      subject: "Email with Attachment",
+      subject: "New Opportunity Request",
       text: "Please find the attachment.",
+      html: `<span>Name : ${nameOfStudent}</span><br><span>Branch : ${branch}</span><br><span>Message : ${message}</span>`,
       attachments: [attachment],
     };
 
