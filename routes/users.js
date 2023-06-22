@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 
 router.use(bodyParser.json());
 
-// Sign up API endpoint
+
 router.post("/signup", async (req, res) => {
   const { username, fullname, email, password } = req.body;
 
@@ -23,7 +23,6 @@ router.post("/signup", async (req, res) => {
     return res.status(400).json({message : "Email already exists"})
   }
 
-  // Hash password before saving to database
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = new User({
